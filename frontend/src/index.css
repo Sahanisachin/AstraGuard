@@ -1,0 +1,119 @@
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+:root {
+  color-scheme: dark;
+  --primary: 159, 100%, 50%;
+  --secondary: 188, 100%, 50%;
+  --accent: 260, 100%, 70%;
+  
+  --bg: 224, 71%, 4%;
+  --card: 224, 71%, 7%;
+  --os-bar: 224, 71%, 5%;
+  
+  --text-primary: 210, 40%, 98%;
+  --text-secondary: 215, 20%, 65%;
+  --border: 0, 255, 159, 0.15;
+}
+
+[data-theme="blue"] {
+  --primary: 210, 100%, 50%;
+  --secondary: 200, 100%, 60%;
+  --accent: 230, 100%, 70%;
+  
+  --bg: 220, 20%, 10%;
+  --card: 220, 20%, 15%;
+  --os-bar: 220, 20%, 12%;
+  
+  --text-primary: 210, 40%, 98%;
+  --text-secondary: 215, 20%, 65%;
+  --border: 0, 132, 255, 0.2;
+}
+
+[data-theme="purple"] {
+  --primary: 280, 100%, 60%;
+  --secondary: 320, 100%, 60%;
+  --accent: 300, 100%, 50%;
+  
+  --bg: 260, 30%, 8%;
+  --card: 260, 30%, 12%;
+  --os-bar: 260, 30%, 10%;
+  
+  --text-primary: 210, 40%, 98%;
+  --text-secondary: 215, 20%, 65%;
+  --border: 216, 58, 255, 0.2;
+}
+
+[data-theme="light"] {
+  color-scheme: light;
+  --primary: 220, 100%, 50%;
+  --secondary: 180, 100%, 40%;
+  --accent: 260, 80%, 60%;
+  
+  --bg: 0, 0%, 96%;
+  --card: 0, 0%, 100%;
+  --os-bar: 0, 0%, 90%;
+  
+  --text-primary: 220, 20%, 10%;
+  --text-secondary: 220, 10%, 40%;
+  --border: 0, 0, 0, 0.1;
+}
+
+@layer base {
+  body {
+    @apply bg-[hsl(var(--bg))] text-[hsl(var(--text-primary))] selection:bg-primary/30 selection:text-primary overflow-hidden h-screen w-screen transition-colors duration-300;
+  }
+}
+
+@layer components {
+  .os-window {
+    @apply bg-[hsl(var(--card))] border border-[rgba(var(--border))] rounded-[12px] flex flex-col overflow-hidden transition-all duration-300;
+    box-shadow: 0 4px 20px -2px rgba(0,0,0,0.1);
+  }
+  .os-window-header {
+    @apply bg-black/10 px-4 py-3 border-b border-[rgba(var(--border))] flex items-center justify-between text-xs font-semibold tracking-wide select-none text-[hsl(var(--text-primary))];
+  }
+  [data-theme="light"] .os-window-header {
+    @apply bg-black/5;
+  }
+  .os-window-body {
+    @apply p-6 overflow-y-auto flex-1;
+  }
+
+  .cyber-grid {
+    background-image: 
+      linear-gradient(hsla(var(--primary), 0.03) 1px, transparent 1px),
+      linear-gradient(90deg, hsla(var(--primary), 0.03) 1px, transparent 1px);
+    background-size: 30px 30px;
+    mask-image: radial-gradient(circle at center, black, transparent 80%);
+  }
+
+  .cyber-button {
+    @apply relative px-6 py-2.5 bg-[hsla(var(--primary),0.1)] border border-[hsla(var(--primary),0.3)] text-primary font-bold uppercase tracking-wider rounded-lg
+           hover:bg-[hsla(var(--primary),0.2)] hover:border-[hsla(var(--primary),0.6)] hover:-translate-y-[1px] active:translate-y-0 transition-all duration-200
+           shadow-[0_0_10px_rgba(var(--border))] hover:shadow-[0_0_15px_rgba(var(--border))];
+  }
+  .cyber-button-secondary {
+    @apply relative px-6 py-2.5 bg-[hsla(var(--secondary),0.1)] border border-[hsla(var(--secondary),0.3)] text-secondary font-bold uppercase tracking-wider rounded-lg
+           hover:bg-[hsla(var(--secondary),0.2)] hover:border-[hsla(var(--secondary),0.6)] hover:-translate-y-[1px] active:translate-y-0 transition-all duration-200;
+  }
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  @apply bg-[hsla(var(--primary),0.2)] rounded-full hover:bg-[hsla(var(--primary),0.4)] transition-all;
+}
+
+.result-container {
+    height: 300px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding-right: 8px;
+}

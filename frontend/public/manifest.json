@@ -1,0 +1,26 @@
+{
+  "name": "PassCrack Security Suite v2.1",
+  "short_name": "PassCrack v2.1",
+  "description": "High-performance cryptographic security and dictionary-based password recovery suite.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#050505",
+  "theme_color": "#00ff9f",
+  "icons": [
+    {
+      "src": "favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    },
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

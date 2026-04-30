@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PassCrack - Cyber Command Center</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Roboto+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="dashboard">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-logo">
+                <i class="fas fa-shield-hal"></i>
+                <span>PassCrack</span>
+            </div>
+            <nav class="sidebar-nav">
+                <div class="nav-group">Core Systems</div>
+                <a href="#" class="nav-item active"><i class="fas fa-terminal"></i> Terminal</a>
+                <a href="#" class="nav-item"><i class="fas fa-network-wired"></i> Network Grid</a>
+                <a href="#" class="nav-item"><i class="fas fa-database"></i> Matrices</a>
+                <div class="nav-group">Resources</div>
+                <a href="#" class="nav-item"><i class="fas fa-book"></i> Documentation</a>
+                <a href="#" class="nav-item"><i class="fas fa-cog"></i> Configuration</a>
+            </nav>
+        </aside>
+
+        <!-- Main Workspace -->
+        <main class="workspace">
+            <header class="top-bar">
+                <div class="header-title">
+                    <h1>Command Center</h1>
+                    <p>Universal dictionary-based decryption matrix</p>
+                </div>
+                <div class="header-status">
+                    <span class="pulse-dot"></span> System Online
+                </div>
+            </header>
+
+            <!-- Metrics Grid -->
+            <div class="metrics-grid">
+                <div class="metric-card">
+                    <div class="metric-title">Active Threads</div>
+                    <div class="metric-value" id="metricThreads">16</div>
+                    <div class="metric-trend positive"><i class="fas fa-arrow-up"></i> Optimal</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-title">Peak Speed</div>
+                    <div class="metric-value" id="metricPeakSpeed">0 p/s</div>
+                    <div class="metric-trend neutral"><i class="fas fa-minus"></i> Stable</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-title">System Load</div>
+                    <div class="metric-value">42%</div>
+                    <div class="metric-trend negative"><i class="fas fa-arrow-up"></i> +5%</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-title">Success Rate</div>
+                    <div class="metric-value">98.4%</div>
+                    <div class="metric-trend positive"><i class="fas fa-arrow-up"></i> +1.2%</div>
+                </div>
+            </div>
+
+            <!-- Dependency Check -->
+            <div class="dependency-check card" id="dependencyCheck">
+                <div class="loading-scan">
+                    <i class="fas fa-radar fa-spin text-primary"></i>
+                    <span>Scanning System Dependencies...</span>
+                </div>
+            </div>
+
+            <div class="main-content" id="mainContent" style="display: none;">
+                
+                <div class="layout-grid">
+                    <!-- Left Column: Uploads & Controls -->
+                    <div class="left-col">
+                        <!-- Upload Target -->
+                        <div class="upload-section card">
+                            <h2><i class="fas fa-lock text-primary"></i> Target Payload</h2>
+                            <div class="upload-area" id="targetUpload" data-type="target">
+                                <div class="upload-icon-wrapper">
+                                    <i class="fas fa-file-shield"></i>
+                                </div>
+                                <p>Initialize Target Data</p>
+                                <small>Drop protected file here (Office, PDF, ZIP, etc.)</small>
+                                <input type="file" id="targetFile" style="display: none;" accept=".docx,.doc,.xlsx,.xls,.pptx,.ppt,.pdf,.zip,.7z,.rar">
+                            </div>
+                            <div class="file-info" id="targetInfo" style="display: none;">
+                                <div class="file-details">
+                                    <i class="fas fa-file-code text-primary"></i>
+                                    <div class="file-meta">
+                                        <span class="filename" id="targetFilename"></span>
+                                        <span class="filesize" id="targetSize"></span>
+                                    </div>
+                                </div>
+                                <div class="file-hash">
+                                    <span class="hash-label">SHA-256</span>
+                                    <code id="targetHash"></code>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Upload Wordlist -->
+                        <div class="upload-section card">
+                            <h2><i class="fas fa-list text-secondary"></i> Dictionary Matrix</h2>
+                            <div class="upload-area" id="wordlistUpload" data-type="wordlist">
+                                <div class="upload-icon-wrapper secondary">
+                                    <i class="fas fa-database"></i>
+                                </div>
+                                <p>Load Wordlist</p>
+                                <small>Drop wordlist file here (TXT, CSV, etc.)</small>
+                                <input type="file" id="wordlistFile" style="display: none;" accept=".txt,.csv,.xls,.xlsx,.docx,.pptx">
+                            </div>
+                            <div class="file-info" id="wordlistInfo" style="display: none;">
+                                <div class="file-details">
+                                    <i class="fas fa-file-lines text-secondary"></i>
+                                    <div class="file-meta">
+                                        <span class="filename" id="wordlistFilename"></span>
+                                        <span class="filesize" id="wordlistSize"></span>
+                                    </div>
+                                </div>
+                                <div class="file-stats">
+                                    <span class="stat badge" id="wordlistCount">Indexing...</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Controls -->
+                        <div class="controls card" id="controls" style="display: none;">
+                            <button class="btn btn-primary" id="startCrack" disabled>
+                                <i class="fas fa-bolt"></i> INITIATE SEQUENCE
+                            </button>
+                            <button class="btn btn-secondary" id="installDeps" style="display: none;">
+                                <i class="fas fa-download"></i> INSTALL PACKAGES
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Right Column: Progress, Visuals, Terminal -->
+                    <div class="right-col">
+                        
+                        <!-- Progress Section -->
+                        <div class="progress-section card" id="progressSection" style="display: none;">
+                            <div class="progress-header">
+                                <h3><i class="fas fa-satellite-dish pulse-icon"></i> Brute-Force Matrix Active</h3>
+                                <button class="btn btn-danger btn-sm outline" id="stopCrack">
+                                    <i class="fas fa-times"></i> ABORT
+                                </button>
+                            </div>
+                            
+                            <div class="progress-bar-container">
+                                <div class="progress-bar glow-bar" id="progressBar" style="width: 0%"></div>
+                            </div>
+                            
+                            <div class="progress-stats cyber-grid">
+                                <div class="stat-item">
+                                    <span class="stat-label">STATUS</span>
+                                    <span class="stat-value text-primary" id="status">INITIALIZING...</span>
+                                </div>
+                                <div class="stat-item">
+                                    <span class="stat-label">SPEED</span>
+                                    <span class="stat-value" id="speedText">0 p/s</span>
+                                </div>
+                                <div class="stat-item">
+                                    <span class="stat-label">PROGRESS</span>
+                                    <span class="stat-value" id="progressText">0/0 (0%)</span>
+                                </div>
+                                <div class="stat-item">
+                                    <span class="stat-label">CURRENT TRY</span>
+                                    <span class="stat-value text-secondary truncate" id="currentPassword">-</span>
+                                </div>
+                                <div class="stat-item" style="display: none;">
+                                    <!-- Kept for JS compatibility if needed -->
+                                    <span class="stat-value" id="currentMethod">-</span>
+                                </div>
+                            </div>
+
+                            <!-- Charts -->
+                            <div class="charts-container">
+                                <div class="chart-wrapper">
+                                    <canvas id="speedChart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Terminal Output -->
+                        <div class="terminal-card card" id="terminalSection" style="display: block;">
+                            <div class="terminal-header">
+                                <span>/var/log/syslog</span>
+                                <div class="window-controls">
+                                    <span></span><span></span><span></span>
+                                </div>
+                            </div>
+                            <div class="terminal-body" id="terminalLogs">
+                                <div class="log-entry info">[*] System initialized. Awaiting parameters...</div>
+                            </div>
+                        </div>
+
+                        <!-- Result Section -->
+                        <div class="result-section card" id="resultSection" style="display: none;">
+                            <div class="result-success" id="resultSuccess">
+                                <div class="success-icon-wrapper glow">
+                                    <i class="fas fa-unlock-alt"></i>
+                                </div>
+                                <h3 class="text-primary">DECRYPTION SUCCESSFUL</h3>
+                                <div class="result-details cyber-box">
+                                    <div class="result-item">
+                                        <span class="result-label">PASSWORD:</span>
+                                        <span class="result-value text-primary highlight-text" id="resultPassword"></span>
+                                    </div>
+                                    <div class="result-item">
+                                        <span class="result-label">METHOD:</span>
+                                        <span class="result-value" id="resultMethod"></span>
+                                    </div>
+                                    <div class="result-item">
+                                        <span class="result-label">HASH:</span>
+                                        <code class="result-hash" id="resultHash"></code>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="result-failed" id="resultFailed" style="display: none;">
+                                <div class="failed-icon-wrapper">
+                                    <i class="fas fa-skull-crossbones"></i>
+                                </div>
+                                <h3 class="text-danger">DECRYPTION FAILED</h3>
+                                <p class="error-msg" id="errorMessage"></p>
+                            </div>
+                            
+                            <div class="result-actions">
+                                <button class="btn btn-primary outline" id="newCrack">
+                                    <i class="fas fa-redo"></i> NEW TARGET
+                                </button>
+                                <button class="btn btn-secondary outline" id="downloadResult" style="display: none;">
+                                    <i class="fas fa-download"></i> EXPORT LOGS
+                                </button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Toast Notifications -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <script src="/static/js/main.js"></script>
+</body>
+</html>

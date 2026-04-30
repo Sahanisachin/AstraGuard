@@ -1,0 +1,17 @@
+.venv/
+uploads/
+passcrack_uploads/
+passcrack_jobs/
+node_modules/
+frontend/node_modules/
+__pycache__/
+*.pyc
+*.pyo
+tunnel.log
+tunnel.txt
+cloudflared.exe
+pinggy.txt
+rockyou.txt
+*.zip
+*.7z
+*.rar
